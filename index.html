@@ -11,18 +11,71 @@
   <link rel="stylesheet" type="text/css" href="styles/modules.css">
 </head>
 <body>
-  <header>  
-    <nav class="main-nav">
-      <h1>WildlifeGo!</h1>
-      <img class="logo" src="">      
-      <div class="icon-menu"></div>
-      <ul>
-        <li class="tab" data-content="mystats"><a href="#" class="icon-home">My stats</a></li>
-        <li class="tab" data-content="highscores"><a href="#" class="icon-address-book">High-scores</a></li>
-      </ul>
-    </nav>
-  </header>
-
   
+    <nav class="main-nav">
+      <div class="container">
+        <object type="image" data="logo"></object>
+        <h1>WildlifeGo!</h1>    
+      <div>
+        <span class="menu-button">Menu</span>
+        <span class="login-button">Login</span>
+        </div>
+      </div>
+    </nav>
+  
+
+  <div class="nav-menu hide">
+      <div class="container">
+        <ul>
+          <li>Personal stats</li>
+          <li>High scores</li>  
+        </ul>
+      </div>
+    </div>
+  
+    
+    <div class="login-form">
+      <div class="container">
+        <form>
+          <h4>Username</h4>
+          <input class="username" />
+          <h4>Password</h4>
+          <input type="password" />
+          <input class="sign-in-button" type="submit" value="Sign In" />
+        </form>
+      </div>
+    </div>
+
+  <main>
+    <div class="intro">
+      <h3>How this works</h3>
+      <p>You only lorem once, so it's time to choose some dummy text with swagger. Yolo Ipsum has you covered:
+          "Aliquam getting paid well holla whenever that stop, sometimes I wish the same quia fuga et voluptate. Sit ut suscipit fugit dolores tempora beatae. Voluptatem and that's when she text me. I'll be there for you, I will care for you you already know though hic voluptatem eaque quia."
+      </p>
+    </div>
+
+    <div>
+      <h3>Choose a Park</h3>
+      <div class="container-btn">
+        <img src="images/wood.jpg" alt="">        
+        <button class="btn">Click me</button>
+      </div>
+      <div class="container-btn">
+        <img src="images/wood.jpg" alt="">        
+        <button class="btn">Click me</button>
+      </div>
+      <div class="container-btn">
+        <img src="images/wood.jpg" alt="">        
+        <button class="btn">Click me</button>
+      </div>
+      <div class="container-btn">
+        <img src="images/wood.jpg" alt="">        
+        <button class="btn">Click me</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
