@@ -33,11 +33,8 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
   //This function will get called once a park button has been clicked on the homepage. It will query the iNaturalist API and return a raw data object that we will append to the that particular park object. Might need to pass in the Park index as well as the rawAnimals index. 
 
   Park.loadAnimals = function (rawAnimalObj) {
-
     Park.all[rawAnimalObj[0].park].animals = rawAnimalObj;
-
     return rawAnimalObj;
-  
   };
 
   //Park prototype for rendering to handlebards. This might be redundant with what we have on park-view.js
@@ -50,7 +47,7 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
   //Create instances for each park. Might not need to set to variables since they're being stored in Park.all anyway.
   //TODO: Fill in park descriptions. 
-  new Park('Discovery Park', 47.661817, -122.417857, 1, '', 0);
+  new Park('Discovery Park', 47.661817, -122.417857, 1, 'Discovery Park is a 534 acre natural area park operated by the Seattle Parks and Recreation. It is the largest city park in Seattle, and occupies most of the former Fort Lawton site. The site is one of breathtaking majesty. Situated on Magnolia Bluff overlooking Puget Sound, Discovery Park offers spectacular view of both the Cascade and the Olympic Mountain ranges. The secluded site includes two miles of protected tidal beaches as well as open meadow lands, dramatic sea cliffs, forest groves, active sand dunes, thickets and streams.', 0);
   new Park('Washington Park Arboretum', 47.635974, -122.294531, 1, '', 1);
   new Park('Interlaken Park', 47.636529, -122.309307, 0.5, '', 2);
   new Park('Ravenna Park', 47.671953, -122.307066, 0.5, '', 3);

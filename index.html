@@ -24,7 +24,7 @@
 
   <!-- Need to set this template up once we have the object from the API -->
   <script type="text/x-handlebars-template" id="park-details-template">
-   
+    
     <h1>{{name}}</h1>
    
   </script>
@@ -32,6 +32,8 @@
   <script type="text/x-handlebars-template" id="animal-list-template">
     <img src="{{image}}">
     <h1>{{name}}</h1>
+    <p>Last spotted on {{observed_on}}</p>
+    <p><a href="{{wiki}}">Learn more...</a></p>
   
   </script>
 
