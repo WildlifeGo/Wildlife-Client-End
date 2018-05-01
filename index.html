@@ -23,17 +23,16 @@
   </script>
 
   <!-- Need to set this template up once we have the object from the API -->
-  <script type="text/x-handlebars-template" id="park-list-template">
-    <li class="book-items" data-bookid={{book_id}}>
-      <div class="animal-container">
-        <img src={{image_url}}>
-        <div class="book-overlay">
-          <h3>{{title}}</h3>
-          <p>{{author}}</p>
-          <p class="detail-button"><a href="/books/{{book_id}}">view details</a></p>
-        </div>
-      </div>
-    </li>
+  <script type="text/x-handlebars-template" id="park-details-template">
+   
+    <h1>{{name}}</h1>
+   
+  </script>
+
+  <script type="text/x-handlebars-template" id="animal-list-template">
+    <img src="{{image}}">
+    <h1>{{name}}</h1>
+  
   </script>
 
 </head>
@@ -47,14 +46,14 @@
       <h1>Wildlife Go</h1>
       <div class="icon-menu"></div>
     </div>
-    <nav class="nav-menu">
+    <!-- <nav class="nav-menu">
       <ul>
         <li><a href="/">home</a></li>
         <li class="admin"><a href="/books/new">add book</a></li>
         <li class="admin"><a href="/books/search">search g-books</a></li>
         <li><a href="/admin">login</a></li>
       </ul>
-    </nav>
+    </nav> -->
   </header>
 
   <main>
@@ -78,34 +77,9 @@
 
     <section class="park-details container">
       <section class="park-detail"></section>
+      <section class="animal-list"></section>
     </section>
 
-
-    <!-- Maybe refactor below for login -->
-    <!-- <section class="search-view container">
-      <form id="search-form">
-        <input type="text" name="title" placeholder="title">
-        <input type="text" name="author" placeholder="author">
-        <input type="text" name="isbn" placeholder="isbn">
-        <button type="submit">search</button>
-      </form>
-      <section class="search-detail"></section>
-    </section> -->
-
-    <!-- <section class="search-results container">
-      <section>
-        <ul id="search-list"></ul>
-      </section>
-    </section> -->
-
-
-    <!-- <section class="admin-view container">
-      <h2 class="view-title">verify your passphrase</h2>
-      <form id="admin-form">
-        <input type="number" name="passphrase" placeholder="1234">
-        <button type="submit">verify</button>
-      </form>
-    </section> -->
   </main>
   <footer>
     <aside class="social-links">
