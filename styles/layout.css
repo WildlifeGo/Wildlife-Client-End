@@ -130,14 +130,12 @@ nav .container .menu-button {
   width: 100%;  
 }
 
-.container img {
+.container-btn img {
 
-  /* position: absolute;  */
   width: 100%;
   min-width: 400px;
-  height: auto;
-  z-index: -1;
-  
+  height: 200px;
+  z-index: -1;  
 }
 
 .container-btn .btn {
@@ -148,7 +146,6 @@ nav .container .menu-button {
   cursor: pointer;  
   text-align: center;
 }
-
 
 
 
