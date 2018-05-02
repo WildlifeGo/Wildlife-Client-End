@@ -69,6 +69,12 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
       .catch(errorCallback);
   };
 
+  Park.sendResults = (results, callback) => {
+    $.post(`${ENV.apiUrl}/api/v1/parks/submit`, results)
+    .then(callback)
+    .catch(errorCallback);
+  }
+  
   module.Park = Park;
 
 })(app);

@@ -39,8 +39,6 @@ body {
 }
 
 
-
-
 .parallax h1 {
   font-family: 'Amatic SC', cursive;
   font-size: 120px;
@@ -292,4 +290,8 @@ header {
 
 .animal-list {
   display:block;
+}
+
+#button {
+  z-index:20;
 }

@@ -22,6 +22,7 @@ var app = app || {};
   parkView.initHomePage = function() {
     resetView();
     $('.park-view').show();
+    $('.park-list').show();
     $('.parks').on('click', function(event) {
     
       event.preventDefault();
@@ -57,12 +58,42 @@ var app = app || {};
       console.log(animal);
       let template = Handlebars.compile($('#animal-list-template').text());
       $('.animal-list').append(template(animal));
-
     }
     );
 
+    let animalsSeen = [];
 
+      $(".animal-list").on('click', function(event) {
+        event.preventDefault();
+        let clicked = event.target;
+        let clickedName = $(clicked).parent().attr('id');
+        console.log(clickedName);
+        animalsSeen.push(clickedName.toLowerCase());
+        console.log(animalsSeen);
+      })
+
+  
+
+      $("#button").on('click', function(event) {
+        event.preventDefault();
+        console.log(event.target);
+        //if logged in: send info in animalsSeen array
+        //else send to log in page
+        app.Park.sendResults(animalsSeen, parkView.initResultsPage);
+
+      } )
   };
+
+  parkView.initResultsPage = function(results) {
+    resetView();
+    $('.animal-results').show();
+    
+    results.forEach(userResults=> {
+      console.log(userResults);
+      let template = Handlebars.compile($('.animal-results').text());
+      $('.animal-results').append(template(userResults));
+    })
+  }
 
   module.parkView = parkView;
 
