@@ -22,6 +22,7 @@ var app = app || {};
   parkView.initHomePage = function() {
     resetView();
     $('.park-view').show();
+    $('.park-list').show();
     $('.parks').on('click', function(event) {
     
       event.preventDefault();
