@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+  margin: 0 auto;
+  background-color: #8FC1E3;
+ 
+}
+
+body {
+  padding:30px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.park-detail {
+  width:980px;
+  height:200px;
+  display: inline-block;
+  border: 2px solid yellow;
+}
+
+.park-card {
+  width:100%;
+  height: 100%;
+  display: block;
+  border: 1px solid red;
+  border-bottom: 2px solid black;
+}
+
+.park-card img {
+  float:left;
+  margin-left:20px;
+  width:30%;
+  border-radius:20px;
+ 
+}
+
+.park-card .park-text {
+  float:left;
+  width:60%;
+  padding-left: 10px;
+  border: 1px solid blue;
+}
+
+.park-card h1 {
+  
+  padding-left:10px;
+  float:left;
+  width:100%;
+  color: black;
+  font-size: 2em;
+  border: 1px solid red;
+  color: #687864;
+
+}
+
+.park-card p {
+  
+  padding-left:10px;
+  color: black;
+  font-size: 1em;
+  border: 1px solid red;
+
+}
+
+.animal-list {
+  display:block;
+}
