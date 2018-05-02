@@ -11,7 +11,7 @@ var app = app || {};
 
   //Hides nav dropdown when something is clicked on.
   function resetView() {
-    $('.container').hide();
+    $('.sec-container').hide();
     $('.nav-menu').slideUp(350);
   }
 
@@ -28,10 +28,11 @@ var app = app || {};
 
       //List items for each park on index page have numerical id's that act like indices.
       let selectedParkIndex = event.target.id;
+      // console.log(selectedParkIndex);
 
       //Grab the selected park's object from the master Park object (on)
       let selectedPark = module.Park.all[selectedParkIndex];
-
+      // console.log(selectedPark);
 
       module.Park.fetch(selectedPark, parkView.initSelectedParkPage);
 
@@ -41,17 +42,25 @@ var app = app || {};
   };
 
   //TODO: This is where I have the most work to do. How to properly append to html. Right now we have two handlebar things being compiled. One for park, one for animals. Probably just need one. See note below.
-  parkView.initSelectedParkPage = function(parkIndex) {
+  parkView.initSelectedParkPage = function(animals) {
     resetView();
     $('.park-details').show();
-    $('#search-list').empty(); //what do we need to empty here? Maybe delete.
-    let currPark = parkIndex;
+    // $('#search-list').empty(); //what do we need to empty here? Maybe delete.
+    let currPark = animals[0].park;
 
     //We need to pass the whole Park object (for that particular park) into the template. We can either hardcode the animal cards into the html-side template. Or loop through with a foreach similar to the next line of code. Looping would be better if we ever want the user to select the number of animals displayed. In this case, would it be a template within a template?
-    module.Park[currPark].animals.forEach(animal=> $('#book-list').append(animal.toHtml()));
+    let source = module.Park.parkToHtml(app.Park.all[currPark]);
+    console.log(source);
+    $('.park-detail').append(source);
 
-    let template = Handlebars.compile($('#book-detail-template').text());
-    $('.book-detail').append(template(ctx.book));
+    module.Park.all[currPark].animals.forEach(animal=> {
+      console.log(animal);
+      let template = Handlebars.compile($('#animal-list-template').text());
+      $('.animal-list').append(template(animal));
+
+    }
+    );
+
 
   };
 
