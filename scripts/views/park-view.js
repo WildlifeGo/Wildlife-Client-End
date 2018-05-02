@@ -11,7 +11,7 @@ var app = app || {};
 
   //Hides nav dropdown when something is clicked on.
   function resetView() {
-    $('.container').hide();
+    $('.sec-container').hide();
     $('.nav-menu').slideUp(350);
   }
 
