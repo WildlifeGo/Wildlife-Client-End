@@ -9,6 +9,9 @@ ENV.productionApiUrl = 'insert cloud API server URL here';
 ENV.developmentApiUrl = 'http://localhost:3000';
 ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
+
+
+
 (function (module) {
   function errorCallback(err) {
     console.error(err);
@@ -17,7 +20,7 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
   //Array to hold all of the parks once they're constructed.
   Park.all = [];
-
+  
   //Park constructor function. Might want to set this to a variable?
   function Park(name, lat, long, radius, description) {
     this.name = name;
@@ -29,7 +32,7 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
     Park.all.push(this);
   }
 
-  //This function will get called once a park button has been clicked on the homepage. It will query the iNaturalist API and return a raw data object that we will append to the that particular park object. Might need to pass in the Park index as well as the rawAnimals index. 
+  //This function will get called once a park button has been clicked on the homepage. It will query the iNaturalist API and return a raw data object that we will append to the that particular park object. Might need to pass in the Park index as well as the rawAnimals index.
   Park.prototype.loadAnimals = function (rawAnimalObj) {
     this.animals = Object.keys(rawAnimalObj).forEach(key => this[key] = rawAnimalObj[key]);
   };
@@ -41,7 +44,7 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
   };
 
   //Create instances for each park. Might not need to set to variables since they're being stored in Park.all anyway.
-  //TODO: Fill in park descriptions. 
+  //TODO: Fill in park descriptions.
   new Park('Discovery Park', 47.661817, -122.417857, 1, '');
   new Park('Washington Park Arboretum', 47.635974, -122.294531, 1, '');
   new Park('Interlaken Park', 47.636529, -122.309307, 0.5, '');
