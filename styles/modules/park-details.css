@@ -291,3 +291,7 @@ header {
 .animal-list {
   display:block;
 }
+
+#button {
+  z-index:20;
+}

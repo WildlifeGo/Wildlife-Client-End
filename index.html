@@ -36,7 +36,7 @@
   </script>
 
   <script type="text/x-handlebars-template" id="animal-list-template">
-    <div class="animal-card">
+    <div class="animal-card" id="{{name}}">
       <img src="{{image}}">
       <h1>{{name}}</h1>
       <p>Last spotted on {{observed_on}}</p>
@@ -213,8 +213,16 @@
     --> <section class="park-details sec-container">
         <section class="park-detail"></section>
         <hr>
-        <section class="animal-list"></section>
-      </section> <!--
+        <section >
+          <div class="animal-list"></div>
+          <div id="delete">
+          <button type="submit" id="button">Submit Animals</button>
+          </div>
+        </section>
+      </section> 
+
+      <section class="animal-results sec-container"></section>
+      <!--
 
     </main>
     <footer>
