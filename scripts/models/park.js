@@ -38,11 +38,16 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
     $('form')[0].reset();
   });
 
-  username.fetch = (username, callback) => {
-
-    $.get(`${ENV.apiUrl}/api/v1/sign-in`)
-    
+  let handleLogin = (event) => {
+    event.preventDefault();
+    let userInput = document.getElementById('username').value;
+    let passInput = document.getElementById('pword').value;
+    let userInfo = [userInput, passInput];
+    console.log(userInput);
+    console.log(passInput);
+    $.get(`${ENV.apiUrl}/signin/${userInfo}`);
   }
+
 
   module.login = login;
   
