@@ -9,7 +9,44 @@ ENV.productionApiUrl = 'insert cloud API server URL here';
 ENV.developmentApiUrl = 'http://localhost:3000';
 ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
+(function(module) {
 
+  $('.login-form').on('submit', (event) => {
+    event.preventDefault();
+    console.log(event.target);
+
+    let username = $('input[name="username"]').val();
+    let password = $('input[name="password"]').val();
+
+    console.log(username, password);
+
+    if (username === 'user' && password === '1234'){
+
+      console.log('hitting if statement');
+      
+      $('form').addClass('hide');
+      $('.sign-out-button').removeAttr('hidden');
+      //call said function here
+    }  
+  });
+
+  $('.sign-out-button').on('click', (event) => {
+    
+    console.log(event.target);
+    $('form').removeClass('hide');
+    $('.sign-out-button').prop('hidden', true);
+    $('form')[0].reset();
+  });
+
+  username.fetch = (username, callback) => {
+
+    $.get(`${ENV.apiUrl}/api/v1/sign-in`)
+    
+  }
+
+  module.login = login;
+  
+})(app);
 
 (function (module) {
   function errorCallback(err) {
@@ -45,9 +82,7 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
     this.index = index;
     Park.all.push(this);
   }
-
-
-
+  
   //This function will get called once a park button has been clicked on the homepage. It will query the iNaturalist API and return a raw data object that we will append to the that particular park object. Might need to pass in the Park index as well as the rawAnimals index.
 
   Park.loadAnimals = function (rawAnimalObj) {
