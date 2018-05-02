@@ -48,12 +48,24 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
   
 })(app);
 
-
 (function (module) {
   function errorCallback(err) {
     console.error(err);
     module.errorView.initErrorPage(err);
   }
+
+  const locationForm = document.getElementById('location-form');
+
+
+  let handleUserLocation = (event) => {
+    event.preventDefault();
+    let userInput = document.getElementById("user-input").value;
+    console.log(userInput);
+    $.get(`${ENV.apiUrl}/api/v1/parks/googlemaps/${userInput}`);
+  }
+
+  locationForm.addEventListener('submit', handleUserLocation)
+
 
   //Array to hold all of the parks once they're constructed.
   Park.all = [];
@@ -70,7 +82,7 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
     this.index = index;
     Park.all.push(this);
   }
-
+  
   //This function will get called once a park button has been clicked on the homepage. It will query the iNaturalist API and return a raw data object that we will append to the that particular park object. Might need to pass in the Park index as well as the rawAnimals index.
 
   Park.loadAnimals = function (rawAnimalObj) {
