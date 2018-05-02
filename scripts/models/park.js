@@ -9,6 +9,9 @@ ENV.productionApiUrl = 'insert cloud API server URL here';
 ENV.developmentApiUrl = 'http://localhost:3000';
 ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
+
+
+
 (function (module) {
   function errorCallback(err) {
     console.error(err);
@@ -61,9 +64,9 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
     console.log(ENV.apiUrl);
 
     $.get(`${ENV.apiUrl}/api/v1/parks/find`, park)
-    .then(Park.loadAnimals)
-    .then(callback)
-    .catch(errorCallback);
+      .then(Park.loadAnimals)
+      .then(callback)
+      .catch(errorCallback);
   };
 
   module.Park = Park;
