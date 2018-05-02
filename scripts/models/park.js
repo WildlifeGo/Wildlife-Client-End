@@ -20,10 +20,7 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
   //Array to hold all of the parks once they're constructed.
   Park.all = [];
-  // Park.userParkInput = '';
-  Park.test = function(){
-    console.log('in park test');
-  }
+  
   //Park constructor function. Might want to set this to a variable?
   function Park(name, lat, long, radius, description) {
     this.name = name;
@@ -60,12 +57,6 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
     .then(Park.loadAnimals)
     .then(callback)
     .catch(errorCallback);
-
-    // ajax call to server to with location for query
-  Park.getLocation = (location) => {
-    console.log('getLocation fired');
-    $.get(`${ENV.apiUrl}/api/v1/map_test/${location}`);
-  }
 
   module.Park = Park;
 
