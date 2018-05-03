@@ -15,7 +15,7 @@ var app = app || {};
         username: $('input[name="username"]').val(),
         password: $('input[name="password"]').val()
       };
-      
+
       app.User.create(user, userView.signOut);
       $('form').addClass('hide');
       $('.sign-out-button').removeAttr('hidden');
