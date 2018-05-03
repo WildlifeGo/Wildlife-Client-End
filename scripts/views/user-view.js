@@ -16,6 +16,15 @@ var app = app || {};
         password: $('input[name="password"]').val()
       };
 
+      userView.authorize = (user, callback) => {
+        $.get(`${KTM.apiUrl}/api/v1/load_user`)
+          .then(
+            console.log(user)
+          )
+          .then(callback)
+          .catch(console.error);
+      };
+
       app.User.create(user, userView.signOut);
       $('form').addClass('hide');
       $('.sign-out-button').removeAttr('hidden');
