@@ -9,46 +9,6 @@ ENV.productionApiUrl = 'insert cloud API server URL here';
 ENV.developmentApiUrl = 'http://localhost:3000';
 ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
-(function(module) {
-
-  $('.login-form').on('submit', (event) => {
-    event.preventDefault();
-    console.log(event.target);
-
-    let username = $('input[name="username"]').val();
-    let password = $('input[name="password"]').val();
-
-    console.log(username, password);
-
-    if (username === 'user' && password === '1234'){
-
-      console.log('hitting if statement');
-
-      $('form').addClass('hide');
-      $('.sign-out-button').removeAttr('hidden');
-      //call said function here
-    }
-  });
-
-  $('.sign-out-button').on('click', (event) => {
-
-    console.log(event.target);
-    $('form').removeClass('hide');
-    $('.sign-out-button').prop('hidden', true);
-    $('form')[0].reset();
-  });
-
-  User.create = user =>
-  $.post('/signin:id', user)
-    .then(() => page('/'))
-    .catch(errorCallback);
-
-  };
-
-
-  module.login = login;
-
-})(app);
 
 (function (module) {
   function errorCallback(err) {
