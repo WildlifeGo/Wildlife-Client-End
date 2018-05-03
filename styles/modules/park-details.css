@@ -1,0 +1,77 @@
+
+.park-details {
+  background-image: url('../../img/background.jpg');
+  background-color: #cccccc;
+
+  /* Set a specific height */
+  height: 100%; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  
+  color: white;
+  position: relative;
+}
+
+.park-detail {
+  margin-top: 200px;
+  width:980px;
+  height:300px;
+  display: inline-block;
+  
+}
+
+.park-card {
+  background: rgb(255,255,255,0.6);
+  border-radius:20px;
+  padding: 40px;
+
+  width:100%;
+  height: 100%;
+  display: block;
+  border: 1px solid red;
+  border-bottom: 2px solid black;
+}
+
+.park-card img {
+  float:left;
+  margin-left:20px;
+  width:30%;
+  border-radius:20px;
+ 
+}
+
+.park-card .park-text {
+  float:left;
+  width:60%;
+  padding-left: 10px;
+  border: 1px solid blue;
+}
+
+.park-card h1 {
+  
+  padding-left:10px;
+  float:left;
+  width:100%;
+  color: black;
+  font-size: 2em;
+  border: 1px solid red;
+  color: #687864;
+
+}
+
+.park-card p {
+  
+  padding-left:10px;
+  color: black;
+  font-size: 1em;
+  border: 1px solid red;
+
+}
+
+.animal-list {
+  display:block;
+}
