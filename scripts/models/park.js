@@ -18,6 +18,37 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
     module.errorView.initErrorPage(err);
   }
 
+  const locationForm = document.getElementById('location-form');
+
+  let googleData = [];
+
+  let handleUserLocation = (event) => {
+    event.preventDefault();
+    let userInput = document.getElementById("user-input").value;
+    console.log(userInput);
+    $.get(`${ENV.apiUrl}/api/v1/parks/googlemaps/:${userInput}`)
+      // .then(results => {locationData[0]=results[1].lat; locationData[1].lng;})
+      // .then(results => console.log(results[1].lat))
+      .then(Park.handleGoogle)
+      .then(console.log(googleData))
+      .catch(errorCallback);
+
+  };
+
+  Park.handleGoogle = (data) => {
+
+    googleData.push(data);
+
+    new Park(googleData[0][0], googleData[0][1].lat, googleData[0][1].lng, 1, 'Google location', 'http://www.seattleandsound.com/images/magnusonpark290.jpg', 5);
+
+    let selectedPark = Park.all[5];
+
+    Park.fetch(selectedPark, app.parkView.initSelectedParkPage);
+
+  }
+
+  locationForm.addEventListener('submit', handleUserLocation);
+
   //Array to hold all of the parks once they're constructed.
   Park.all = [];
 
@@ -71,10 +102,10 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
   Park.sendResults = (results, callback) => {
     $.post(`${ENV.apiUrl}/api/v1/parks/submit`, results)
-    .then(callback)
-    .catch(errorCallback);
+      .then(callback)
+      .catch(errorCallback);
   }
-  
+
   module.Park = Park;
 
 })(app);
