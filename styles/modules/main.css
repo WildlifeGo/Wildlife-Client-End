@@ -59,6 +59,14 @@ body {
   float:right;
 }
 
+#login{
+  
+}
+
+#logout{
+  display:none;
+}
+
 #tree-logo {
   width: 110px;
   height: 110px;
