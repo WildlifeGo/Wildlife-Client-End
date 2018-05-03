@@ -5,9 +5,9 @@ var app = app || {};
 (function (module) {
 
   //Kept this code in case we use a similar nav dropdown to the books lab.
-  $('.icon-menu').on('click', function (event) {
-    $('.nav-menu').slideToggle(350);
-  });
+  // $('.icon-menu').on('click', function (event) {
+  //   $('.nav-menu').slideToggle(350);
+  // });
 
   //Hides nav dropdown when something is clicked on.
   function resetView() {
@@ -23,9 +23,13 @@ var app = app || {};
     resetView();
     $('.park-view').show();
     $('.park-list').show();
+    $('.about-us').hide();
+    $('.login-form').css("display", "none");
+    $('#title').css("display", "block");
+    // $('.home').css("border", "1px solid white");
 
     app.userView.initLogin(); // add login functionality
-    
+
     $('.parks').on('click', function (event) {
 
       event.preventDefault();
@@ -53,11 +57,57 @@ var app = app || {};
     $('#location-form').css("display", "block");
   });
 
+  $('.login').on('click', function () {
+    console.log('clicked');
+    $('.sign-out-button').css("display", "none");
+    $('.login').css("display", "none");
+    $('.logout').css("display", "block");
+    $('#title').css("display", "none");
+    $('.login-form').css("display", "block");
+
+
+  });
+
+  $('.logout').on('click', function () {
+    console.log('clicked');
+    $('.login').css("display", "block");
+    $('.logout').css("display", "none");
+    $('#title').css("display", "block");
+    $('.login-form').css("display", "none");
+  });
+
+  $('.home').on('click', function () {
+    parkView.initHomePage();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  $('.about').on('click', function(event) {
+    $('.park-view').hide();
+    $('.park-list').hide();
+    $('.login-form').hide();
+    $('.about-us').show();
+  });
+
+  $('#arrow').on('click', function () {
+    
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+  });
+
+  
+
   //TODO: This is where I have the most work to do. How to properly append to html. Right now we have two handlebar things being compiled. One for park, one for animals. Probably just need one. See note below.
   parkView.initSelectedParkPage = function (animals) {
     resetView();
+    $('.home').css("border", "none");
     $('.parallax').hide();
     $('.park-details').show();
+    window.scrollTo( 0, 0 );
     // $('#search-list').empty(); //what do we need to empty here? Maybe delete.
     let currPark = animals[0].park;
 

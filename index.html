@@ -26,11 +26,13 @@
   <!-- Need to set this template up once we have the object from the API -->
   <script type="text/x-handlebars-template" id="park-details-template">
 
-    <div class="park-card">
-      <img class="park-image" src="{{image_url}}">
-      <div class="park-text">
-        <h1>{{name}}</h1>
-        <p>{{description}}</p>
+    <div id="park-card-wrapper">
+      <div class="park-card">
+        <img class="park-image" src="{{image_url}}">
+        <div class="park-text">
+          <h1>{{name}}</h1>
+          <p>{{description}}</p>
+        </div>
       </div>
     </div>
 
@@ -75,20 +77,52 @@
               <p class="login">Log In</p>
               <p class="logout">Log Out</p>
             </div>
-            <div class="tab">
+            <div class="tab about">
               <p>About</p>
             </div>
             <div class="tab">
-              <p>Home</p>
+              <p class="home">Home</p>
             </div>
           </div>
         </header>
 
         <section class="park-view sec-container">
 
-        <h1>wildlife go</h1>
-        <img id="arrow" src="./img/arrow-white.png">
+        <h1 id="title">wildlife go</h1>
+        <img id="arrow" src="./img/arrow-white.png"> 
+
+        <div class="login-form">
+            <div>
+              <form>
+                <h4 class="form-title">Username</h4>
+                <input class="username" name="username" id="username"/>
+                <h4 class="form-title">Password</h4>
+                <input type="password" name="password" />
+                <input class="sign-in-button" type="submit" value="Sign In" id="pword"/>   
+                <input class="sign-out-button" type="button" value="Sign Out" hidden/>       
+              </form>
+              <br>
+              
+            </div>
+          </div>
+
      
+    </section>
+
+    <section class="about-us">
+        <div id="about-us">
+           
+        <img src="" alt="">
+        <p> Timea<br> </p><br><br>
+        <img src="\" alt="">
+        <p> Rhiannon <br> </p><br><br>
+        <img src="" alt="">
+        <p> Michael <br> </p><br><br>
+        <img src="" alt="">
+        <p> Ben</p><br><br><br>
+        <img src="" alt="">
+        <p> Katy </p><br><br>
+      </div>
     </section>
   </div>
 
@@ -193,19 +227,8 @@
         </ul> -->
       </section>
     </section>
-    
-    <div class="login-form">
-        <div class="container">
-          <form>
-            <h4>Username</h4>
-            <input class="username" name="username" id="username"/>
-            <h4>Password</h4>
-            <input type="password" name="password" />
-            <input class="sign-in-button" type="submit" value="Sign In" id="pword"/>          
-          </form>
-          <input class="sign-out-button" type="button" value="Sign Out" hidden/>
-        </div>
-      </div>
+
+   
 
     <!-- <main>
       <div class="intro">
@@ -235,7 +258,7 @@
                 <p>About</p>
               </div>
               <div class="tab">
-                <p>Home</p>
+                <p class="home">Home</p>
               </div>
             </div>
           </header>
