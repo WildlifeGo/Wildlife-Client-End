@@ -7,7 +7,7 @@ var app = app || {};
   //Kept this code in case we use a similar nav dropdown to the books lab.
   $('.icon-menu').on('click', function(event) {
     $('.nav-menu').slideToggle(350);
-  })
+  });
 
   //Hides nav dropdown when something is clicked on.
   function resetView() {
@@ -23,7 +23,7 @@ var app = app || {};
     resetView();
     $('.park-view').show();
     $('.parks').on('click', function(event) {
-    
+
       event.preventDefault();
 
       //List items for each park on index page have numerical id's that act like indices.
@@ -60,8 +60,6 @@ var app = app || {};
 
     }
     );
-
-
   };
 
   module.parkView = parkView;

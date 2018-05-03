@@ -23,34 +23,31 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
     if (username === 'user' && password === '1234'){
 
       console.log('hitting if statement');
-      
+
       $('form').addClass('hide');
       $('.sign-out-button').removeAttr('hidden');
       //call said function here
-    }  
+    }
   });
 
   $('.sign-out-button').on('click', (event) => {
-    
+
     console.log(event.target);
     $('form').removeClass('hide');
     $('.sign-out-button').prop('hidden', true);
     $('form')[0].reset();
   });
 
-  let handleLogin = (event) => {
-    event.preventDefault();
-    let userInput = document.getElementById('username').value;
-    let passInput = document.getElementById('pword').value;
-    let userInfo = [userInput, passInput];
-    console.log(userInput);
-    console.log(passInput);
-    $.get(`${ENV.apiUrl}/signin/${userInfo}`);
-  }
+  User.create = user =>
+  $.post('/signin:id', user)
+    .then(() => page('/'))
+    .catch(errorCallback);
+
+  };
 
 
   module.login = login;
-  
+
 })(app);
 
 (function (module) {
@@ -64,12 +61,12 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
 
   let handleUserLocation = (event) => {
     event.preventDefault();
-    let userInput = document.getElementById("user-input").value;
+    let userInput = document.getElementById('user-input').value;
     console.log(userInput);
     $.get(`${ENV.apiUrl}/api/v1/parks/googlemaps/${userInput}`);
-  }
+  };
 
-  locationForm.addEventListener('submit', handleUserLocation)
+  locationForm.addEventListener('submit', handleUserLocation);
 
 
   //Array to hold all of the parks once they're constructed.
@@ -87,7 +84,7 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
     this.index = index;
     Park.all.push(this);
   }
-  
+
   //This function will get called once a park button has been clicked on the homepage. It will query the iNaturalist API and return a raw data object that we will append to the that particular park object. Might need to pass in the Park index as well as the rawAnimals index.
 
   Park.loadAnimals = function (rawAnimalObj) {
