@@ -2,12 +2,12 @@
 
 var app = app || {};
 
-(function(module) {
+(function (module) {
 
   //Kept this code in case we use a similar nav dropdown to the books lab.
-  $('.icon-menu').on('click', function(event) {
+  $('.icon-menu').on('click', function (event) {
     $('.nav-menu').slideToggle(350);
-  })
+  });
 
   //Hides nav dropdown when something is clicked on.
   function resetView() {
@@ -19,12 +19,15 @@ var app = app || {};
   const parkView = {};
 
   //Init home page. Will show section with class of park and add click listeners to each list item (with class parks (plural)).
-  parkView.initHomePage = function() {
+  parkView.initHomePage = function () {
     resetView();
     $('.park-view').show();
     $('.park-list').show();
-    $('.parks').on('click', function(event) {
+
+    app.userView.initLogin(); // add login functionality
     
+    $('.parks').on('click', function (event) {
+
       event.preventDefault();
 
       //List items for each park on index page have numerical id's that act like indices.
@@ -37,14 +40,23 @@ var app = app || {};
 
       module.Park.fetch(selectedPark, parkView.initSelectedParkPage);
 
+
+
       //Should we use the page js call here? Or is this already being done in the function directly above.
 
     });
   };
 
+  $('#choose-text').on('click', function () {
+    console.log('clicked');
+    $('#choose-text').css("display", "none");
+    $('#location-form').css("display", "block");
+  });
+
   //TODO: This is where I have the most work to do. How to properly append to html. Right now we have two handlebar things being compiled. One for park, one for animals. Probably just need one. See note below.
-  parkView.initSelectedParkPage = function(animals) {
+  parkView.initSelectedParkPage = function (animals) {
     resetView();
+    $('.parallax').hide();
     $('.park-details').show();
     // $('#search-list').empty(); //what do we need to empty here? Maybe delete.
     let currPark = animals[0].park;
@@ -54,48 +66,69 @@ var app = app || {};
     console.log(source);
     $('.park-detail').append(source);
 
-    module.Park.all[currPark].animals.forEach(animal=> {
+    // check for animals in local storage
+    let allAnimalsAsString = localStorage.getItem(module.Park.all[currPark].name);
+    let retrievedAnimals = JSON.parse(allAnimalsAsString);
+    // console.log (retrievedAnimals);
+    if (retrievedAnimals && retrievedAnimals.length) {
+      for (var i in animals) {
+        animals[i] = retrievedAnimals[i];
+
+      }
+      console.log('retrieved from LS: ', animals);
+    }
+    // empty array to save objects loaded to page
+    let allAnimalsLoaded = []
+    module.Park.all[currPark].animals.forEach(animal => {
       console.log(animal);
       let template = Handlebars.compile($('#animal-list-template').text());
       $('.animal-list').append(template(animal));
-    }
-    );
+
+
+      allAnimalsLoaded.push(animal);
+
+    });
+
+    // save to local storage for access on return to page locally
+    let saveAnimal = JSON.stringify(allAnimalsLoaded);
+    console.log('object sent to local storage: ' + saveAnimal);
+    console.log(module.Park.all[currPark].name);
+    localStorage.setItem(module.Park.all[currPark].name, saveAnimal);
 
     let animalsSeen = [];
 
-      $(".animal-list").on('click', function(event) {
-        event.preventDefault();
-        let clicked = event.target;
-        let clickedName = $(clicked).parent().attr('id');
-        console.log(clickedName);
-        animalsSeen.push(clickedName.toLowerCase());
-        console.log(animalsSeen);
-      })
+    $('.animal-list').on('click', function (event) {
+      event.preventDefault();
+      let clicked = event.target;
+      let clickedName = $(clicked).parent().attr('id');
+      console.log(clickedName);
+      animalsSeen.push(clickedName.toLowerCase());
+      console.log(animalsSeen);
+    });
 
-  
 
-      $("#button").on('click', function(event) {
-        event.preventDefault();
-        console.log(event.target);
-        //if logged in: send info in animalsSeen array
-        //else send to log in page
-        app.Park.sendResults(animalsSeen, parkView.initResultsPage);
 
-      } )
+    $('#submit-button').on('click', function (event) {
+      event.preventDefault();
+      console.log(event.target);
+      //if logged in: send info in animalsSeen array
+      //else send to log in page
+      app.Park.sendResults(animalsSeen, parkView.initResultsPage);
+
+    });
   };
 
-  parkView.initResultsPage = function(results) {
+  parkView.initResultsPage = function (results) {
     resetView();
     $('.animal-results').show();
-    
-    results.forEach(userResults=> {
+
+    results.forEach(userResults => {
       console.log(userResults);
       let template = Handlebars.compile($('.animal-results').text());
       $('.animal-results').append(template(userResults));
-    })
-  }
+    });
+  };
 
   module.parkView = parkView;
 
 })(app);
-

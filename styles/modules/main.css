@@ -28,7 +28,7 @@ body {
   position: relative;
 }
 
-.parallax header {
+.header {
   position: fixed;
   height: 140px;
   /* border-bottom: 3px solid white; */
@@ -48,7 +48,7 @@ body {
 
 }
 
-.parallax header div {
+.header-content-container {
   margin-right: 15px;
  
 }
@@ -59,15 +59,15 @@ body {
   float:right;
 }
 
-#login{
+.login{
   
 }
 
-#logout{
+.logout{
   display:none;
 }
 
-#tree-logo {
+.tree-logo {
   width: 110px;
   height: 110px;
   float:left;
@@ -75,7 +75,7 @@ body {
   margin-left: 20px;
 }
 
-.parallax header div div p {
+.tab {
   position: relative;
   font-family: 'Amatic SC', cursive;
   font-size: 40px;
@@ -234,6 +234,7 @@ header {
 #choose-text {
   color:black;
   text-decoration: underline;
+  display:block;
 }
 
 #choose-text:hover {
@@ -241,61 +242,10 @@ header {
   opacity:0.6;
 }
 
-
-.park-detail {
-  width:980px;
-  height:200px;
-  display: inline-block;
-  border: 2px solid yellow;
+#location-form{
+  display:none;
 }
 
-.park-card {
-  width:100%;
-  height: 100%;
-  display: block;
-  border: 1px solid red;
-  border-bottom: 2px solid black;
-}
-
-.park-card img {
-  float:left;
-  margin-left:20px;
-  width:30%;
-  border-radius:20px;
- 
-}
-
-.park-card .park-text {
-  float:left;
-  width:60%;
-  padding-left: 10px;
-  border: 1px solid blue;
-}
-
-.park-card h1 {
-  
-  padding-left:10px;
-  float:left;
-  width:100%;
-  color: black;
-  font-size: 2em;
-  border: 1px solid red;
-  color: #687864;
-
-}
-
-.park-card p {
-  
-  padding-left:10px;
-  color: black;
-  font-size: 1em;
-  border: 1px solid red;
-
-}
-
-.animal-list {
-  display:block;
-}
 
 #button {
   z-index:20;

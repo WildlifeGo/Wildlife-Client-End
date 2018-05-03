@@ -23,6 +23,8 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
   let googleData = [];
 
   let handleUserLocation = (event) => {
+    $('#choose-text').css("display","block");
+    $('#location-form').css("display","none");
     event.preventDefault();
     let userInput = document.getElementById("user-input").value;
     console.log(userInput);
