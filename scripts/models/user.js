@@ -26,9 +26,6 @@ KTM.apiUrl = KTM.isProduction ? KTM.productionApiUrl : KTM.developmentApiUrl;
       .then(callback)
       .catch(errorCallback);
 
-
-
-
   module.User = User;
 
 })(app);

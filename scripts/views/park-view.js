@@ -78,7 +78,7 @@ var app = app || {};
   //Kept this code in case we use a similar nav dropdown to the books lab.
   $('.icon-menu').on('click', function(event) {
     $('.nav-menu').slideToggle(350);
-  })
+  });
 
   //Hides nav dropdown when something is clicked on.
   function resetView() {
@@ -97,7 +97,7 @@ var app = app || {};
     $('.park-view').show();
     $('.park-list').show();
     $('.parks').on('click', function(event) {
-    
+
       event.preventDefault();
 
       //List items for each park on index page have numerical id's that act like indices.
@@ -136,37 +136,37 @@ var app = app || {};
 
     let animalsSeen = [];
 
-      $(".animal-list").on('click', function(event) {
-        event.preventDefault();
-        let clicked = event.target;
-        let clickedName = $(clicked).parent().attr('id');
-        console.log(clickedName);
-        animalsSeen.push(clickedName.toLowerCase());
-        console.log(animalsSeen);
-      })
+    $('.animal-list').on('click', function(event) {
+      event.preventDefault();
+      let clicked = event.target;
+      let clickedName = $(clicked).parent().attr('id');
+      console.log(clickedName);
+      animalsSeen.push(clickedName.toLowerCase());
+      console.log(animalsSeen);
+    });
 
-  
 
-      $("#button").on('click', function(event) {
-        event.preventDefault();
-        console.log(event.target);
-        //if logged in: send info in animalsSeen array
-        //else send to log in page
-        app.Park.sendResults(animalsSeen, parkView.initResultsPage);
 
-      } )
+    $('#button').on('click', function(event) {
+      event.preventDefault();
+      console.log(event.target);
+      //if logged in: send info in animalsSeen array
+      //else send to log in page
+      app.Park.sendResults(animalsSeen, parkView.initResultsPage);
+
+    } );
   };
 
   parkView.initResultsPage = function(results) {
     resetView();
     $('.animal-results').show();
-    
+
     results.forEach(userResults=> {
       console.log(userResults);
       let template = Handlebars.compile($('.animal-results').text());
       $('.animal-results').append(template(userResults));
-    })
-  }
+    });
+  };
 
   module.parkView = parkView;
 
