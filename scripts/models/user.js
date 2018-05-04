@@ -23,6 +23,7 @@ KTM.apiUrl = KTM.isProduction ? KTM.productionApiUrl : KTM.developmentApiUrl;
 
   User.create = (user, callback) =>
     $.post(`${KTM.apiUrl}/api/v1/signin`, user)
+
       .then(callback)
       .catch(errorCallback);
 

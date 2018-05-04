@@ -19,25 +19,21 @@ var app = app || {};
       $
         .get(`${ENV.apiUrl}/api/v1/load_user`)
         .then(testVar => {
-          for (var i = 0; i < testVar.length; i++) {
-            if (testVar[i].username === user.username) {
-              if (testVar[i].password === user.password) {
-                console.log('right password');
-                logToken = true;
-                userView.loggingIn();
-                break
-              } else {
-                console.log('wrong password');
-                $('form')[0].reset();
-                break
-              }
-            } else {
+            //cutest line in the file:
+            let arrIndex = (testVar.map(function(e){return e.username;}).indexOf(`${user.username}`));
+            console.log(arrIndex);
+            if (arrIndex === -1) {
+              console.log('new user');
               app.User.create(user, userView.signOut);
+              logToken = true;
+            } else if (user.password === testVar[arrIndex].password)  {
+              console.log('valid password');
+              logToken = true;
+              userView.loggingIn();
+            } else {
+              console.log('invalid password');
             }
-          }
-        });
-
-
+          });
 
       userView.loggingIn = () => {
         $('form').addClass('hide');
@@ -46,18 +42,17 @@ var app = app || {};
     });
   };
 
-  userView.signOut = () => {
-
     $('.sign-out-button').on('click', (event) => {
+      console.log('clicked');
       logToken = false;
       $('form').removeClass('hide');
       $('.sign-out-button').prop('hidden', true);
-      document.getElementById('username').value='';
-      document.getElementById('user-passw').value='';
       $('form')[0].reset();
       // remove localstorage, localstorage.clear(), set boolean to false
+      document.getElementById('username').value='';
+      document.getElementById('user-pword').value='';
     });
-  };
+
 
   module.userView = userView;
 })(app);
