@@ -260,6 +260,7 @@
     margin-bottom: 0;
   }
 
+
   .text b {
     font-size: 30px;
     margin: 0;
@@ -269,5 +270,21 @@
     font-weight: lighter; 
     font-size: 12px;
     margin: 0;
+  }
+
+
+  .animal-results {
+    width:40%;
+    font-family: 'Amatic SC', cursive;
+    font-size:30px;
+    margin:0 auto;
+    text-align:center;
+    padding-top:5em;
+  }
+
+  .animal-results #userseen{
+    font-size:40px;
+    font-weight:bold;
+    text-decoration:underline;
   }
 }

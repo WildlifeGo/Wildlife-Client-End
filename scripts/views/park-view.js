@@ -238,6 +238,13 @@ var app = app || {};
 
   parkView.initResultsPage = function (results) {
     resetView();
+    window.scrollTo( 0, 0 );
+    $('.park-view').hide();
+    $('.park-list').hide();
+    $('.about-us').hide();
+    $('.login-form').css("display", "none");
+    $('.parallax').show();
+    $('#title').css("display", "none");
     $('.animal-results').show();
 
     console.log(results);
