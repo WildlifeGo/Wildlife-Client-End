@@ -6,30 +6,41 @@ var app = app || {};
 (function (module) {
 
   const userView = {};
-
+  let userNameDB = [];
   userView.initLogin = () => {
     $('.login-form').on('submit', (event) => {
       event.preventDefault();
-      // console.log(event.target);
       let user = {
         username: $('input[name="username"]').val(),
         password: $('input[name="password"]').val()
       };
 
-      userView.authorize = (user, callback) => {
-        $.get(`${KTM.apiUrl}/api/v1/load_user`)
-          .then(
-            console.log(user)
-          )
-          .then(callback)
-          .catch(console.error);
-      };
+      $
+        .get(`${ENV.apiUrl}/api/v1/load_user`)
+        .then(testVar => {
+          for (var i = 0; i < testVar.length; i++) {
+            if (testVar[i].username === user.username) {
+              if (testVar[i].password === user.password) {
+                console.log('right password');
+                userView.loggingIn();
+                break
+              } else {
+                console.log('wrong password');
+                $('form')[0].reset();
+                break
+              }
+            } else {
+              app.User.create(user, userView.signOut);
+            }
+          }
+        });
 
-      app.User.create(user, userView.signOut);
-      $('form').addClass('hide');
-      $('.sign-out-button').removeAttr('hidden');
 
-      //set up token variable to true here and put in local storage
+
+      userView.loggingIn = () => {
+        $('form').addClass('hide');
+        $('.sign-out-button').removeAttr('hidden');
+      }
     });
   };
 
@@ -38,6 +49,7 @@ var app = app || {};
     $('.sign-out-button').on('click', (event) => {
       $('form').removeClass('hide');
       $('.sign-out-button').prop('hidden', true);
+      document.getElementById('username-input').value='';
       $('form')[0].reset();
       // remove localstorage, localstorage.clear(), set boolean to false
     });
