@@ -1,11 +1,12 @@
 body {
 
-  /* background-image: url('../../img/background.jpg');
-  background-color: #cccccc;
+  /* background-image: url('../../img/background.jpg'); */
+  /* background-color: #cccccc; */
   background-repeat: no-repeat;
-  background-size: 100% 100%; */
+  /* background-size: 100% 100%; */
   margin: 0 auto;
   width: 100%;
+  background-attachment: fixed;
   height:900px;
 
 }
@@ -16,7 +17,7 @@ body {
   background-color: #cccccc;
 
   /* Set a specific height */
-  height: 800px; 
+  height: 100%; 
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;

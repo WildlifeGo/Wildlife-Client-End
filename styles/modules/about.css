@@ -1,0 +1,21 @@
+.about-us {
+  margin-left: 3em;
+  padding-top: 20%;
+}
+
+
+.about-us .card img {
+  width: 20%;
+  float: left;
+}
+
+.card {
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.about-us .card .text {
+  padding: 10px;
+  position: relative;
+  left: 10px;
+}
