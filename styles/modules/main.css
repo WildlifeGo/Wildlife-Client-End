@@ -287,4 +287,15 @@
     font-weight:bold;
     text-decoration:underline;
   }
+
+  #submit-button{
+    text-align: center;
+    font-family: 'Amatic SC', cursive;
+    font-size:30px;
+    margin: 0 auto;
+    background: black;
+    margin-left:80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 }
