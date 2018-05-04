@@ -32,7 +32,7 @@
 
     <div id="park-card-wrapper">
       <div class="park-card">
-        <img class="park-image" src="{{image_url}}">
+       <div id="park-wrap"> <img class="park-image" src="{{image_url}}"></div>
         <div class="park-text">
           <h1>{{name}}</h1>
           <p>{{description}}</p>
@@ -43,7 +43,7 @@
   </script>
 
   <script type="text/x-handlebars-template" id="animal-list-template">
-    <div class="animal-card" id="{{name}}">
+    <div class="animal-card" id="{{index}}" value="{{name}}">
       <img src="{{image}}">
       <h1>{{name}}</h1>
       <p>Spotted on {{observed_on}}</p>
@@ -170,6 +170,8 @@
 
 
         </div>
+
+        <section class="animal-results sec-container"></section>
 
 
     </div>
@@ -301,7 +303,7 @@
       </section>
     </section>
 
-    <section class="animal-results sec-container"></section>
+    
 
 
   </main>

@@ -68,6 +68,7 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
   //This function will get called once a park button has been clicked on the homepage. It will query the iNaturalist API and return a raw data object that we will append to the that particular park object. Might need to pass in the Park index as well as the rawAnimals index.
 
   Park.loadAnimals = function (rawAnimalObj) {
+    console.log(rawAnimalObj);
     Park.all[rawAnimalObj[0].park].animals = rawAnimalObj;
     return rawAnimalObj;
   };
@@ -101,6 +102,7 @@ ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;
   };
 
   Park.sendResults = (animals, userName, callback) => {
+
     console.log('sending to server ' + userName);
     $.ajax({
       url: `${ENV.apiUrl}/api/v1/parks/submit`,
