@@ -50,6 +50,10 @@
 
   </script>
 
+  <script type="text/x-handlebars-template" id="animal-results-template">
+    <p>{{prop}}</p>
+  </script>
+
 </head>
 
 <body>
@@ -60,7 +64,11 @@
     </div>
   </header> -->
 
+
+
   <main>
+
+    <p></p>
 
     <section class="error-view sec-container">
       <h2 class="view-title">There be an issue, cap'n</h2>
@@ -95,9 +103,9 @@
             <div>
               <form>
                 <h4 class="form-title">Username</h4>
-                <input class="username" name="username" id="username"/>
+                <input class="username" name="username" id="username" required/>
                 <h4 class="form-title">Password</h4>
-                <input type="password" name="password" />
+                <input class="username" type="password" name="password" id="user-pword" required/>
                 <input class="sign-in-button" type="submit" value="Sign In" id="pword"/>   
                 <input class="sign-out-button" type="button" value="Sign Out" hidden/>       
               </form>

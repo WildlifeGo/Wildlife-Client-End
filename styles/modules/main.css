@@ -80,6 +80,10 @@ body {
   background-color:black;
 }
 
+.username {
+  color:black;
+}
+
 .hide {
   display:none;
 }

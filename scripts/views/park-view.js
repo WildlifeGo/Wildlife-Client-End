@@ -19,7 +19,7 @@ var app = app || {};
   const parkView = {};
 
   //Init home page. Will show section with class of park and add click listeners to each list item (with class parks (plural)).
-  parkView.initHomePage = function () {
+  parkView.initHomePage = function (callback) {
     resetView();
     $('.park-view').show();
     $('.park-list').show();
@@ -29,6 +29,22 @@ var app = app || {};
     // $('.home').css("border", "1px solid white");
 
     app.userView.initLogin(); // add login functionality
+
+    if(localStorage.logToken===true){
+      $('.login').css("display", "none");
+      $('.logout').css("display", "block");
+    }
+
+    if(callback){
+      
+      $('.parallax').show();
+      $('.sign-out-button').css("display", "none");
+      $('.login').css("display", "none");
+      $('.logout').css("display", "block");
+      $('#title').css("display", "none");
+      $('.login-form').css("display", "block");
+      window.scrollTo( 0, 0 );
+    }
 
     $('.parks').on('click', function (event) {
 
@@ -70,10 +86,19 @@ var app = app || {};
 
   $('.logout').on('click', function () {
     console.log('clicked');
+    localStorage.clear();
     $('.login').css("display", "block");
     $('.logout').css("display", "none");
     $('#title').css("display", "block");
     $('.login-form').css("display", "none");
+    var logToken = false;
+    localStorage.setItem('logToken', logToken);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    document.getElementById('username').value = '';
+    document.getElementById('user-pword').value = '';
   });
 
   $('.home').on('click', function () {
@@ -160,11 +185,18 @@ var app = app || {};
 
     $('#submit-button').on('click', function (event) {
       event.preventDefault();
-      console.log(event.target);
+      if(localStorage.logToken===false || !localStorage || !localStorage.logToken)
+      {
+        console.log('not logged in!');
+        let notLoggedIn=true;
+        parkView.initHomePage(notLoggedIn);
+      }
+      else{
+      
       //if logged in: send info in animalsSeen array
       //else send to log in page
-      app.Park.sendResults(animalsSeen, parkView.initResultsPage);
-
+      app.Park.sendResults(animalsSeen, localStorage.userName, parkView.initResultsPage);
+      }
     });
   };
 
@@ -172,10 +204,16 @@ var app = app || {};
     resetView();
     $('.animal-results').show();
 
+    console.log(results);
+
     results.forEach(userResults => {
       console.log(userResults);
-      let template = Handlebars.compile($('.animal-results').text());
-      $('.animal-results').append(template(userResults));
+      // userResults=JSON.stringify(userResults);
+      let obj = {};
+      obj.prop = userResults;
+      console.log(userResults);
+      let template = Handlebars.compile($('#animal-results-template').text());
+      $('.animal-results').append(template(obj));
     });
   };
 
