@@ -124,6 +124,7 @@ var app = app || {};
     $('.park-list').hide();
     $('.login-form').hide();
     $('.about-us').show();
+    $('#title').css("display", "none");
   });
 
   $('#arrow').on('click', function () {
