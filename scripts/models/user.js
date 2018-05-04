@@ -5,7 +5,7 @@ var app = app || {};
 const KTM = {};
 
 KTM.isProduction = window.location.protocol === 'https:';
-KTM.productionApiUrl = 'https://wildlife-sightings.herokuapp.com/';
+KTM.productionApiUrl = 'https://wildlife-sightings.herokuapp.com';
 KTM.developmentApiUrl = 'http://localhost:3000';
 KTM.apiUrl = KTM.isProduction ? KTM.productionApiUrl : KTM.developmentApiUrl;
 
