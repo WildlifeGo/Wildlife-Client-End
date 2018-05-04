@@ -5,9 +5,9 @@ var app = app || {};
 (function (module) {
 
   //Kept this code in case we use a similar nav dropdown to the books lab.
-  $('.icon-menu').on('click', function (event) {
-    $('.nav-menu').slideToggle(350);
-  });
+  // $('.icon-menu').on('click', function (event) {
+  //   $('.nav-menu').slideToggle(350);
+  // });
 
   //Hides nav dropdown when something is clicked on.
   function resetView() {
@@ -19,13 +19,40 @@ var app = app || {};
   const parkView = {};
 
   //Init home page. Will show section with class of park and add click listeners to each list item (with class parks (plural)).
-  parkView.initHomePage = function () {
+  parkView.initHomePage = function (callback) {
     resetView();
     $('.park-view').show();
     $('.park-list').show();
+    $('.about-us').hide();
+    $('.login-form').css("display", "none");
+    $('.parallax').show();
+    $('#title').css("display", "block");
+    // $('.home').css("border", "1px solid white");
 
     app.userView.initLogin(); // add login functionality
-    
+
+    console.log(localStorage.logToken)
+
+    if(localStorage.logToken){
+      $('.login').css("display", "none");
+      $('.logout').css("display", "block");
+    }
+    else{
+      $('.login').css("display", "block");
+      $('.logout').css("display", "none");
+    }
+    console.log(callback)
+    if(callback){
+      
+      $('.parallax').show();
+      $('.sign-out-button').css("display", "none");
+      $('.login').css("display", "none");
+      $('.logout').css("display", "block");
+      $('#title').css("display", "none");
+      $('.login-form').css("display", "block");
+      window.scrollTo( 0, 0 );
+    }
+
     $('.parks').on('click', function (event) {
 
       event.preventDefault();
@@ -53,11 +80,71 @@ var app = app || {};
     $('#location-form').css("display", "block");
   });
 
+  $('.login').on('click', function () {
+    console.log('clicked');
+    $('.sign-out-button').css("display", "none");
+    
+    $('#title').css("display", "none");
+    $('.login-form').css("display", "block");
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+
+
+  });
+
+  $('.logout').on('click', function () {
+    console.log('clicked');
+    localStorage.clear();
+    $('.login').css("display", "block");
+    $('.logout').css("display", "none");
+    $('#title').css("display", "block");
+    $('.login-form').css("display", "none");
+    var logToken = false;
+    localStorage.setItem('logToken', logToken);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    document.getElementById('username').value = '';
+    document.getElementById('user-pword').value = '';
+  });
+
+  $('.home').on('click', function () {
+    parkView.initHomePage();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  $('.about').on('click', function(event) {
+    $('.park-view').hide();
+    $('.park-list').hide();
+    $('.login-form').hide();
+    $('.about-us').show();
+  });
+
+  $('#arrow').on('click', function () {
+    
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+  });
+
+  
+
   //TODO: This is where I have the most work to do. How to properly append to html. Right now we have two handlebar things being compiled. One for park, one for animals. Probably just need one. See note below.
   parkView.initSelectedParkPage = function (animals) {
     resetView();
+    $('.park-detail').empty();
+    $('.animal-list').empty();
+    $('.home').css("border", "none");
     $('.parallax').hide();
     $('.park-details').show();
+    window.scrollTo( 0, 0 );
     // $('#search-list').empty(); //what do we need to empty here? Maybe delete.
     let currPark = animals[0].park;
 
@@ -110,11 +197,18 @@ var app = app || {};
 
     $('#submit-button').on('click', function (event) {
       event.preventDefault();
-      console.log(event.target);
+      if(localStorage.logToken===false || !localStorage || !localStorage.logToken)
+      {
+        console.log('not logged in!');
+        let notLoggedIn=true;
+        parkView.initHomePage(notLoggedIn);
+      }
+      else{
+      
       //if logged in: send info in animalsSeen array
       //else send to log in page
-      app.Park.sendResults(animalsSeen, parkView.initResultsPage);
-
+      app.Park.sendResults(animalsSeen, localStorage.userName, parkView.initResultsPage);
+      }
     });
   };
 
@@ -122,10 +216,16 @@ var app = app || {};
     resetView();
     $('.animal-results').show();
 
+    console.log(results);
+
     results.forEach(userResults => {
       console.log(userResults);
-      let template = Handlebars.compile($('.animal-results').text());
-      $('.animal-results').append(template(userResults));
+      // userResults=JSON.stringify(userResults);
+      let obj = {};
+      obj.prop = userResults;
+      console.log(userResults);
+      let template = Handlebars.compile($('#animal-results-template').text());
+      $('.animal-results').append(template(obj));
     });
   };
 
