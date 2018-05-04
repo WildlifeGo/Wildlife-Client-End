@@ -5,6 +5,7 @@ var app = app || {};
 const ENV = {};
 
 ENV.isProduction = window.location.protocol === 'https:';
+KTM.productionApiUrl = 'https://wildlife-sightings.herokuapp.com/';
 ENV.productionApiUrl = 'insert cloud API server URL here';
 ENV.developmentApiUrl = 'http://localhost:3000';
 ENV.apiUrl = ENV.isProduction ? ENV.productionApiUrl : ENV.developmentApiUrl;

@@ -5,18 +5,17 @@ var app = app || {};
 const KTM = {};
 
 KTM.isProduction = window.location.protocol === 'https:';
-KTM.productionApiUrl = 'insert cloud API server URL here';
 KTM.developmentApiUrl = 'http://localhost:3000';
 KTM.apiUrl = KTM.isProduction ? KTM.productionApiUrl : KTM.developmentApiUrl;
 
-(function(module) {
+(function (module) {
 
   function errorCallback(err) {
     console.error(err);
     module.errorView.initErrorPage(err);
   }
 
-  function User(userObj){
+  function User(userObj) {
 
     Object.keys(userObj).forEach(key => this[key] = userObj[key]);
   }
