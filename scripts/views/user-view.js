@@ -7,6 +7,7 @@ var app = app || {};
 
   const userView = {};
   let userNameDB = [];
+  var logToken = false;
   userView.initLogin = () => {
     $('.login-form').on('submit', (event) => {
       event.preventDefault();
@@ -22,6 +23,7 @@ var app = app || {};
             if (testVar[i].username === user.username) {
               if (testVar[i].password === user.password) {
                 console.log('right password');
+                logToken = true;
                 userView.loggingIn();
                 break
               } else {
@@ -47,9 +49,11 @@ var app = app || {};
   userView.signOut = () => {
 
     $('.sign-out-button').on('click', (event) => {
+      logToken = false;
       $('form').removeClass('hide');
       $('.sign-out-button').prop('hidden', true);
-      document.getElementById('username-input').value='';
+      document.getElementById('username').value='';
+      document.getElementById('user-passw').value='';
       $('form')[0].reset();
       // remove localstorage, localstorage.clear(), set boolean to false
     });
