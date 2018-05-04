@@ -32,15 +32,21 @@ var app = app || {};
           }).indexOf(`${user.username}`));
           console.log(arrIndex);
           if (arrIndex === -1) {
+            $('#incorrect').css("visibility", "hidden");
             console.log('new user');
             app.User.create(user, userView.signOut);
             logToken = true;
+            $('.login').css("display", "none");
+            $('.logout').css("display", "block");
           } else if (user.password === testVar[arrIndex].password) {
+            $('#incorrect').css("visibility", "hidden");
             console.log('valid password');
             window.scrollTo({
               top: document.body.scrollHeight,
               behavior: 'smooth'
             });
+            $('.login').css("display", "none");
+           $('.logout').css("display", "block");
             
             $('#title').css("display", "block");
             $('.login-form').css("display", "none");
@@ -49,23 +55,11 @@ var app = app || {};
             userView.loggingIn();
           } else {
             console.log('invalid password');
+            $('#incorrect').css("visibility", "visible");
           }
         });
 
-      // userView.loggingIn = () => {
-      //   $('form').addClass('hide');
-      //   $('.sign-out-button').removeAttr('hidden');
-      // }
-
-
-
-
-
-      // app.User.create(user, userView.signOut);
-      // $('form').addClass('hide');
-      // $('.sign-out-button').removeAttr('hidden');
-
-      //set up token variable to true here and put in local storage
+ 
     });
   };
 

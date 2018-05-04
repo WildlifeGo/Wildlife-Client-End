@@ -25,16 +25,23 @@ var app = app || {};
     $('.park-list').show();
     $('.about-us').hide();
     $('.login-form').css("display", "none");
+    $('.parallax').show();
     $('#title').css("display", "block");
     // $('.home').css("border", "1px solid white");
 
     app.userView.initLogin(); // add login functionality
 
-    if(localStorage.logToken===true){
+    console.log(localStorage.logToken)
+
+    if(localStorage.logToken){
       $('.login').css("display", "none");
       $('.logout').css("display", "block");
     }
-
+    else{
+      $('.login').css("display", "block");
+      $('.logout').css("display", "none");
+    }
+    console.log(callback)
     if(callback){
       
       $('.parallax').show();
@@ -76,10 +83,13 @@ var app = app || {};
   $('.login').on('click', function () {
     console.log('clicked');
     $('.sign-out-button').css("display", "none");
-    $('.login').css("display", "none");
-    $('.logout').css("display", "block");
+    
     $('#title').css("display", "none");
     $('.login-form').css("display", "block");
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
 
 
   });
@@ -129,6 +139,8 @@ var app = app || {};
   //TODO: This is where I have the most work to do. How to properly append to html. Right now we have two handlebar things being compiled. One for park, one for animals. Probably just need one. See note below.
   parkView.initSelectedParkPage = function (animals) {
     resetView();
+    $('.park-detail').empty();
+    $('.animal-list').empty();
     $('.home').css("border", "none");
     $('.parallax').hide();
     $('.park-details').show();
