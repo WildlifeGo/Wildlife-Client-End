@@ -172,10 +172,33 @@ var app = app || {};
       let template = Handlebars.compile($('#animal-list-template').text());
       $('.animal-list').append(template(animal));
 
+     console.log(animal.index);
+
+      $(`#${animal.index}`).mouseover(function() {
+        $(`#${animal.index}`).css("background", "rgb(255,255,255,0.9)");
+        $(`#${animal.index}`).css("cursor", "pointer");
+      });
+
+      $(`#${animal.index}`).mouseout(function() {
+        $(`#${animal.index}`).css("background", "rgb(255,255,255,0.6)");
+      });
+
+      $(`#${animal.index}`).on('click', (function() {
+        
+        $(`#${animal.index}`).css("background", "rgb(135,206,250,0.9)");
+        $(`#${animal.index}`).off();
+      }));
+
+    
+    
 
       allAnimalsLoaded.push(animal);
 
-    });
+    }
+  
+
+  
+  );
 
     // save to local storage for access on return to page locally
     let saveAnimal = JSON.stringify(allAnimalsLoaded);
@@ -188,7 +211,7 @@ var app = app || {};
     $('.animal-list').on('click', function (event) {
       event.preventDefault();
       let clicked = event.target;
-      let clickedName = $(clicked).parent().attr('id');
+      let clickedName = $(clicked).parent().attr('value');
       console.log(clickedName);
       animalsSeen.push(clickedName.toLowerCase());
       console.log(animalsSeen);
