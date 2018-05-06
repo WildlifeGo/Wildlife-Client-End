@@ -4,7 +4,6 @@ var app = app || {};
 
 
 (function (module) {
-
   const userView = {};
   var logToken = false;
 
@@ -12,18 +11,14 @@ var app = app || {};
     $('.login-form').on('submit', (event) => {
       event.preventDefault();
 
-      console.log('sdsf')
-
       let user = {
         username: $('input[name="username"]').val(),
         password: $('input[name="password"]').val()
       };
       localStorage.setItem('userName', user.username);
 
-      $
-        .get(`${ENV.apiUrl}/api/v1/load_user`)
+      $.get(`${ENV.apiUrl}/api/v1/load_user`)
         .then(testVar => {
-          //cutest line in the project:
           let arrIndex = (testVar.map(function (e) {
             return e.username;
           }).indexOf(`${user.username}`));
@@ -43,15 +38,13 @@ var app = app || {};
               behavior: 'smooth'
             });
             $('.login').css("display", "none");
-           $('.logout').css("display", "block");
-            
+            $('.logout').css("display", "block");
             $('#title').css("display", "block");
             $('.login-form').css("display", "none");
             logToken = true;
             localStorage.setItem('logToken', logToken);
             userView.loggingIn();
           } else {
-            console.log('invalid password');
             $('#incorrect').css("visibility", "visible");
           }
         });
@@ -61,7 +54,6 @@ var app = app || {};
   };
 
   userView.signOut = () => {
-
     $('.sign-out-button').on('click', (event) => {
       $('form').removeClass('hide');
       $('.sign-out-button').prop('hidden', true);
@@ -70,7 +62,6 @@ var app = app || {};
   };
 
   $('.sign-out-button').on('click', (event) => {
-    console.log('clicked');
     logToken = false;
     $('form').removeClass('hide');
     $('.sign-out-button').prop('hidden', true);
