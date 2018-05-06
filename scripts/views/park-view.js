@@ -3,7 +3,6 @@
 var app = app || {};
 
 (function (module) {
-
   function resetView() {
     $('.sec-container').hide();
     $('.nav-menu').slideUp(350);
@@ -21,9 +20,7 @@ var app = app || {};
     $('#title').css("display", "block");
 
     app.userView.initLogin();
-
-    console.log(localStorage.logToken)
-
+    
     if(localStorage.logToken){
       $('.login').css("display", "none");
       $('.logout').css("display", "block");
@@ -32,9 +29,7 @@ var app = app || {};
       $('.login').css("display", "block");
       $('.logout').css("display", "none");
     }
-    console.log(callback)
     if(callback){
-      
       $('.parallax').show();
       $('.sign-out-button').css("display", "none");
       $('.login').css("display", "none");
@@ -58,13 +53,11 @@ var app = app || {};
   };
 
   $('#choose-text').on('click', function () {
-    console.log('clicked');
     $('#choose-text').css("display", "none");
     $('#location-form').css("display", "block");
   });
 
   $('.login').on('click', function () {
-    console.log('clicked');
     $('.sign-out-button').css("display", "none");
     
     $('#title').css("display", "none");
@@ -78,7 +71,6 @@ var app = app || {};
   });
 
   $('.logout').on('click', function () {
-    console.log('clicked');
     localStorage.clear();
     $('.login').css("display", "block");
     $('.logout').css("display", "none");
@@ -129,56 +121,37 @@ var app = app || {};
     let currPark = animals[0].park;
 
     let source = module.Park.parkToHtml(app.Park.all[currPark]);
-    console.log(source);
     $('.park-detail').append(source);
 
     let allAnimalsAsString = localStorage.getItem(module.Park.all[currPark].name);
     let retrievedAnimals = JSON.parse(allAnimalsAsString);
-    // console.log (retrievedAnimals);
     if (retrievedAnimals && retrievedAnimals.length) {
       for (var i in animals) {
         animals[i] = retrievedAnimals[i];
-
       }
-      console.log('retrieved from LS: ', animals);
     }
     let allAnimalsLoaded = []
     module.Park.all[currPark].animals.forEach(animal => {
-      console.log(animal);
       let template = Handlebars.compile($('#animal-list-template').text());
       $('.animal-list').append(template(animal));
-
-     console.log(animal.index);
-
+      
       $(`#${animal.index}`).mouseover(function() {
         $(`#${animal.index}`).css("background", "rgb(255,255,255,0.9)");
         $(`#${animal.index}`).css("cursor", "pointer");
       });
-
+      
       $(`#${animal.index}`).mouseout(function() {
         $(`#${animal.index}`).css("background", "rgb(255,255,255,0.6)");
       });
-
+      
       $(`#${animal.index}`).on('click', (function() {
-        
         $(`#${animal.index}`).css("background", "rgb(135,206,250,0.9)");
         $(`#${animal.index}`).off();
       }));
-
-    
-    
-
       allAnimalsLoaded.push(animal);
-
     }
-  
-
-  
-  );
-
+ );
     let saveAnimal = JSON.stringify(allAnimalsLoaded);
-    console.log('object sent to local storage: ' + saveAnimal);
-    console.log(module.Park.all[currPark].name);
     localStorage.setItem(module.Park.all[currPark].name, saveAnimal);
 
     let animalsSeen = [];
@@ -187,28 +160,21 @@ var app = app || {};
       event.preventDefault();
       let clicked = event.target;
       let clickedName = $(clicked).parent().attr('value');
-      console.log(clickedName);
       animalsSeen.push(clickedName.toLowerCase());
-      console.log(animalsSeen);
     });
-
-
 
     $('#submit-button').on('click', function (event) {
       event.preventDefault();
       if(localStorage.logToken===false || !localStorage || !localStorage.logToken)
       {
-        console.log('not logged in!');
         let notLoggedIn=true;
         parkView.initHomePage(notLoggedIn);
       }
       else{
-      
       app.Park.sendResults(animalsSeen, localStorage.userName, parkView.initResultsPage);
       }
     });
   };
-
   parkView.initResultsPage = function (results) {
     resetView();
     window.scrollTo( 0, 0 );
@@ -220,18 +186,12 @@ var app = app || {};
     $('#title').css("display", "none");
     $('.animal-results').show();
 
-    console.log(results);
-
     results.forEach(userResults => {
-      console.log(userResults);
       let obj = {};
       obj.prop = userResults;
-      console.log(userResults);
       let template = Handlebars.compile($('#animal-results-template').text());
       $('.animal-results').append(template(obj));
     });
   };
-
   module.parkView = parkView;
-
 })(app);
