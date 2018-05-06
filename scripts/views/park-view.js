@@ -4,21 +4,13 @@ var app = app || {};
 
 (function (module) {
 
-  //Kept this code in case we use a similar nav dropdown to the books lab.
-  // $('.icon-menu').on('click', function (event) {
-  //   $('.nav-menu').slideToggle(350);
-  // });
-
-  //Hides nav dropdown when something is clicked on.
   function resetView() {
     $('.sec-container').hide();
     $('.nav-menu').slideUp(350);
   }
 
-  //Object to hold all our initPage functions.
   const parkView = {};
 
-  //Init home page. Will show section with class of park and add click listeners to each list item (with class parks (plural)).
   parkView.initHomePage = function (callback) {
     resetView();
     $('.park-view').show();
@@ -27,9 +19,8 @@ var app = app || {};
     $('.login-form').css("display", "none");
     $('.parallax').show();
     $('#title').css("display", "block");
-    // $('.home').css("border", "1px solid white");
 
-    app.userView.initLogin(); // add login functionality
+    app.userView.initLogin();
 
     console.log(localStorage.logToken)
 
@@ -57,19 +48,11 @@ var app = app || {};
 
       event.preventDefault();
 
-      //List items for each park on index page have numerical id's that act like indices.
       let selectedParkIndex = event.target.id;
-      // console.log(selectedParkIndex);
 
-      //Grab the selected park's object from the master Park object (on)
       let selectedPark = module.Park.all[selectedParkIndex];
-      // console.log(selectedPark);
 
       module.Park.fetch(selectedPark, parkView.initSelectedParkPage);
-
-
-
-      //Should we use the page js call here? Or is this already being done in the function directly above.
 
     });
   };
@@ -135,10 +118,7 @@ var app = app || {};
     });
   });
 
-  
-
-  //TODO: This is where I have the most work to do. How to properly append to html. Right now we have two handlebar things being compiled. One for park, one for animals. Probably just need one. See note below.
-  parkView.initSelectedParkPage = function (animals) {
+   parkView.initSelectedParkPage = function (animals) {
     resetView();
     $('.park-detail').empty();
     $('.animal-list').empty();
@@ -146,15 +126,12 @@ var app = app || {};
     $('.parallax').hide();
     $('.park-details').show();
     window.scrollTo( 0, 0 );
-    // $('#search-list').empty(); //what do we need to empty here? Maybe delete.
     let currPark = animals[0].park;
 
-    //We need to pass the whole Park object (for that particular park) into the template. We can either hardcode the animal cards into the html-side template. Or loop through with a foreach similar to the next line of code. Looping would be better if we ever want the user to select the number of animals displayed. In this case, would it be a template within a template?
     let source = module.Park.parkToHtml(app.Park.all[currPark]);
     console.log(source);
     $('.park-detail').append(source);
 
-    // check for animals in local storage
     let allAnimalsAsString = localStorage.getItem(module.Park.all[currPark].name);
     let retrievedAnimals = JSON.parse(allAnimalsAsString);
     // console.log (retrievedAnimals);
@@ -165,7 +142,6 @@ var app = app || {};
       }
       console.log('retrieved from LS: ', animals);
     }
-    // empty array to save objects loaded to page
     let allAnimalsLoaded = []
     module.Park.all[currPark].animals.forEach(animal => {
       console.log(animal);
@@ -200,7 +176,6 @@ var app = app || {};
   
   );
 
-    // save to local storage for access on return to page locally
     let saveAnimal = JSON.stringify(allAnimalsLoaded);
     console.log('object sent to local storage: ' + saveAnimal);
     console.log(module.Park.all[currPark].name);
@@ -229,8 +204,6 @@ var app = app || {};
       }
       else{
       
-      //if logged in: send info in animalsSeen array
-      //else send to log in page
       app.Park.sendResults(animalsSeen, localStorage.userName, parkView.initResultsPage);
       }
     });
@@ -251,7 +224,6 @@ var app = app || {};
 
     results.forEach(userResults => {
       console.log(userResults);
-      // userResults=JSON.stringify(userResults);
       let obj = {};
       obj.prop = userResults;
       console.log(userResults);
