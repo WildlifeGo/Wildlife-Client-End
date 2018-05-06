@@ -14,13 +14,10 @@ var app = app || {};
 
       console.log('sdsf')
 
-
-      // console.log(event.target);
       let user = {
         username: $('input[name="username"]').val(),
         password: $('input[name="password"]').val()
       };
-      // window.scrollTo(0,document.body.scrollHeight);
       localStorage.setItem('userName', user.username);
 
       $
@@ -69,7 +66,6 @@ var app = app || {};
       $('form').removeClass('hide');
       $('.sign-out-button').prop('hidden', true);
       $('form')[0].reset();
-      // remove localstorage, localstorage.clear(), set boolean to false
     });
   };
 
@@ -79,7 +75,6 @@ var app = app || {};
     $('form').removeClass('hide');
     $('.sign-out-button').prop('hidden', true);
     $('form')[0].reset();
-    // remove localstorage, localstorage.clear(), set boolean to false
     document.getElementById('username').value = '';
     document.getElementById('user-pword').value = '';
   });
